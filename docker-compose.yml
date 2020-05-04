@@ -1,0 +1,28 @@
+##
+## Name: docker-node-srv-i
+## Dockerfile to build a Node stack image for development purposes.
+## Author: https://about.me/henrycv
+##
+## Description: this image contains the following tools:
+##  Node 14.
+##
+
+version: '3'
+services:
+  docker-node-srv-i:
+    build:
+        context: .
+        dockerfile: ./docker/node-14/Dockerfile
+        args:
+          APP_DIR_DOCKER: ${APP_DIR_DOCKER}
+    container_name: node-srv-14
+    image: node-srv-14
+    environment:
+      APP_DIR: ${APP_DIR_DOCKER}
+    working_dir: ${APP_DIR_DOCKER}
+    volumes:
+      - ${APP_DIR_HOST}:${APP_DIR_DOCKER}
+    ports:
+      - "8080:8080"
+    expose:
+    - "8080/tcp"
